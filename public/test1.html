@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>并发限制的处理</title>
+</head>
+<body>
+    <script type="text/javascript">
+        // 串行执行  串行会从上到下依次执行对应接口请求。
+        var ajax1 = function () {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    console.log("1000");
+                    resolve();
+                }, 1000);
+            });
+        };
+        var ajax2 = function () {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    console.log("2000");
+                    resolve();
+                }, 2000);
+            });
+        };
+        var ajax3 = function () {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    console.log("3000");
+                    resolve();
+                }, 3000);
+            });
+        };
+        console.time() 
+        ajax1().then(() => {
+            return ajax2();
+        }).then(() => {
+            return ajax3();
+        }).then(() => {
+            console.log("end");
+            console.timeEnd();
+        });
+
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

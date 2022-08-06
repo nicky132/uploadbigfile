@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>并发限制的处理</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+    /*
+        并行
+        通常，我们在需要保证代码在多个异步处理之后执行，会用到：
+        Promise.all((promises: [])).then((fun: function));
+        Promise.all可以保证，promises数组中所有promise对象都达到resolve状态，才执行then回调。
+    */
+
+
+
+    const allAjax = function () {
+        return [1000, 2000, 3000].map((current) => {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    console.log(current);
+                    resolve();
+                }, current);
+            });
+        });
+    };
+    console.time();
+    Promise.all(allAjax()).then(() => {
+        // console.log('end');
+        console.timeEnd();
+    });
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
